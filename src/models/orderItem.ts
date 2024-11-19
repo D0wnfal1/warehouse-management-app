@@ -1,5 +1,6 @@
 export interface OrderItem {
-    id: string;
-    orderId: string;
+    id: number;
+    orderId: number;
+    productId: number;
     quantity: number;
 }

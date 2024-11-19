@@ -1,49 +1,93 @@
 <div class="container mt-4">
-    <h2 class="mb-3">Orders</h2>
-  
-    <div *ngIf="isLoading" class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  
-    <div *ngIf="!isLoading && orders.length === 0" class="alert alert-warning">
-      No orders available.
-    </div>
-  
-    <div *ngIf="!isLoading && orders.length > 0">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Order Date</th>
-            <th>Items</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <td>{{ order.id }}</td>
-            <td>{{ order.orderDate | date: 'short' }}</td>
-            <td>
-              <ul>
-                <li *ngFor="let item of order.items">
-                  Product ID: {{ item.id }}, Quantity: {{ item.quantity }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <span
-                class="badge"
-                [class.bg-success]="order.isCompleted"
-                [class.bg-secondary]="!order.isCompleted"
-              >
-                {{ order.isCompleted ? 'Completed' : 'Pending' }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <h2 class="mb-3">Orders</h2>
+
+  <!-- Filters Section -->
+  <div class="mb-3">
+    <label for="statusFilter" class="form-label">Filter by Status</label>
+    <select id="statusFilter" class="form-select" [(ngModel)]="filterStatus">
+      <option value="">All</option>
+      <option value="completed">Completed</option>
+      <option value="pending">Pending</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="idFilter" class="form-label">Filter by ID</label>
+    <input
+      id="idFilter"
+      type="text"
+      class="form-control"
+      [(ngModel)]="filterId"
+      placeholder="Enter Order ID"
+    />
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-  
+
+  <!-- No Orders Message -->
+  <div *ngIf="!isLoading && filteredOrders.length === 0" class="alert alert-warning">
+    No orders match the current filters.
+  </div>
+
+  <!-- Orders Table -->
+  <div *ngIf="!isLoading && filteredOrders.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Items</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of filteredOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.orderDate | date: 'short' }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let item of order.items">
+                Product ID: {{ item.productId }}, Quantity: {{ item.quantity }}
+              </li>
+            </ul>
+          </td>
+          <td>
+            <span
+              class="badge"
+              [class.bg-success]="order.isCompleted"
+              [class.bg-secondary]="!order.isCompleted"
+            >
+              {{ order.isCompleted ? 'Completed' : 'Pending' }}
+            </span>
+          </td>
+          <td>
+            <button
+              *ngIf="!order.isCompleted"
+              class="btn btn-success btn-sm"
+              (click)="completeOrder(order.id)"
+            >
+              Complete
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteOrder(order.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Create Order Button -->
+  <div class="text-end mt-3">
+    <button (click)="createOrder()" class="btn btn-primary">Create New Order</button>
+  </div>
+</div>

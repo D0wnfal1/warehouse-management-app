@@ -1,7 +1,7 @@
 import { OrderItem } from "./orderItem";
 
 export interface Order {
-    id: string;
+    id: number;
     orderDate: string;
     items: OrderItem[];
     isCompleted: boolean;

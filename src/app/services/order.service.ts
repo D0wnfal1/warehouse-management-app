@@ -15,4 +15,20 @@ export class OrderService {
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl);
   }
+
+  getOrderById(id: number): Observable<Order>{
+    return this.http.get<Order>(`${this.apiUrl}/${id}`);
+  }
+
+  createOrder(order: Order): Observable<Order>{
+    return this.http.post<Order>(this.apiUrl, order);
+  }
+
+  completeOrder(id: number): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${id}/complete`, id);
+  }
+  
+  deleteOrder(id: number): Observable<Order> {
+    return this.http.delete<Order>(`${this.apiUrl}/${id}`);
+  }  
 }

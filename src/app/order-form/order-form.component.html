@@ -1,0 +1,58 @@
+<div class="order-form">
+  <h2>Create Order</h2>
+  <form (ngSubmit)="createOrder()" #orderForm="ngForm">
+    <div class="form-group">
+      <label for="orderDate">Order Date</label>
+      <input
+        type="date"
+        id="orderDate"
+        name="orderDate"
+        [(ngModel)]="order.orderDate"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Order Items</label>
+      <div *ngFor="let item of order.items; let i = index">
+        <label for="product-{{ i }}">Product</label>
+        <select
+        id="product-{{ i }}"
+        [(ngModel)]="order.items[i].productId"
+        name="productId-{{ i }}"
+        class="form-control"
+        required
+      >
+        <option *ngFor="let product of products" [value]="product.id">
+          {{ product.name }}
+        </option>
+      </select>
+      
+
+        <label for="quantity-{{ i }}">Quantity</label>
+        <input
+          type="number"
+          id="quantity-{{ i }}"
+          [(ngModel)]="order.items[i].quantity"
+          name="quantity-{{ i }}"
+          class="form-control"
+          min="1"
+          required
+        />
+
+        <button type="button" (click)="removeItem(i)" class="btn btn-danger">
+          Remove Item
+        </button>
+      </div>
+
+      <button type="button" (click)="addItem()" class="btn btn-secondary">
+        Add Item
+      </button>
+    </div>
+
+    <button type="submit" [disabled]="!orderForm.valid" class="btn btn-primary">
+      Create Order
+    </button>
+  </form>
+</div>
