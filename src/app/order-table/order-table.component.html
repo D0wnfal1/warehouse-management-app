@@ -1,0 +1,49 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Orders</h2>
+  
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && orders.length === 0" class="alert alert-warning">
+      No orders available.
+    </div>
+  
+    <div *ngIf="!isLoading && orders.length > 0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Order Date</th>
+            <th>Items</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.orderDate | date: 'short' }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let item of order.items">
+                  Product ID: {{ item.id }}, Quantity: {{ item.quantity }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <span
+                class="badge"
+                [class.bg-success]="order.isCompleted"
+                [class.bg-secondary]="!order.isCompleted"
+              >
+                {{ order.isCompleted ? 'Completed' : 'Pending' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
