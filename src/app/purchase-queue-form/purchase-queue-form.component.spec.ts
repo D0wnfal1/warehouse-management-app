@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PurchaseQueueFormComponent } from './purchase-queue-form.component';
 
-describe('PurchaseQueueFormComponent', () => {
+describe('PurchasequeueFormComponent', () => {
   let component: PurchaseQueueFormComponent;
   let fixture: ComponentFixture<PurchaseQueueFormComponent>;
 
