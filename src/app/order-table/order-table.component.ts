@@ -15,8 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class OrderTableComponent implements OnInit {
   orders: Order[] = [];
   isLoading = true;
-
-  // Filters
+  errorMessage: string | null = null;
   filterStatus: string = '';
   filterId: string = '';
 
@@ -57,16 +56,18 @@ export class OrderTableComponent implements OnInit {
   }
 
   completeOrder(id: number): void {
+    this.errorMessage = null; 
     this.orderService.completeOrder(id).subscribe({
       next: () => {
         alert('Order marked as completed!');
         this.fetchOrders();
       },
       error: (err) => {
-        console.error('Failed to complete order', err);
+        this.errorMessage = err.error?.message || 'Not many Products in stock.';
       },
     });
   }
+  
 
   deleteOrder(id: number): void {
     if (confirm('Are you sure you want to delete this order?')) {
