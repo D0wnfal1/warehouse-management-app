@@ -1,4 +1,4 @@
-<h2 class="text-center my-5">Products</h2>
+<h2 class="text-center my-5 text-info">Products</h2>
 
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
@@ -44,20 +44,32 @@
           <td>
             <button
               class="btn btn-primary btn-sm m-2"
-              (click)="editProduct(product.id)"
-            >
-              Edit
+              (click)="editProduct(product.id)">
+              <i class="bi bi-pencil"></i> Edit
             </button>
             <button
               class="btn btn-danger btn-sm"
-              (click)="deleteProduct(product.id)"
-            >
-              Delete
+              (click)="deleteProduct(product.id)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+            <button
+              *ngIf="product.isInPurchaseQueue"
+              class="btn btn-warning btn-sm"
+              (click)="product.isInPurchaseQueue = !product.isInPurchaseQueue; updateQueueStatus(product)">
+              <i class="bi bi-x-circle"></i> Remove from Queue
+            </button>
+            <button
+              *ngIf="!product.isInPurchaseQueue"
+              class="btn btn-success btn-sm"
+              (click)="product.isInPurchaseQueue = !product.isInPurchaseQueue; updateQueueStatus(product)">
+              <i class="bi bi-plus-circle"></i> Add to Queue
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-success" (click)="createProduct()">Add Product</button>
+    <button class="btn btn-success" (click)="createProduct()">
+      <i class="bi bi-plus-circle"></i> Add Product
+    </button>
   </div>
 </div>

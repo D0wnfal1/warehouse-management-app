@@ -61,4 +61,18 @@ export class ProductTableComponent {
   createProduct(): void {
     this.router.navigate(['/create-product']);
   }
+  updateQueueStatus(product: Product): void {
+    this.productService.updateProduct(product).subscribe({
+      next: (updatedProduct) => {
+        const index = this.products.findIndex(p => p.id === updatedProduct.id);
+        if (index !== -1) {
+          this.products[index] = updatedProduct;
+        }
+      },
+      error: (error) => {
+        console.error('Failed to update product status:', error);
+      }
+    });
+  }
+  
 }

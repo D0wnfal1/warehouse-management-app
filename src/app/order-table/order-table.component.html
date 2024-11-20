@@ -1,7 +1,6 @@
 <div class="container mt-4">
-  <h2 class="mb-3">Orders</h2>
+  <h2 class="mb-3 text-center text-info">Orders</h2>
 
-  <!-- Filters Section -->
   <div class="mb-3">
     <label for="statusFilter" class="form-label">Filter by Status</label>
     <select id="statusFilter" class="form-select" [(ngModel)]="filterStatus">
@@ -22,22 +21,19 @@
     />
   </div>
 
-  <!-- Loading Spinner -->
   <div *ngIf="isLoading" class="text-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 
-  <!-- No Orders Message -->
   <div *ngIf="!isLoading && filteredOrders.length === 0" class="alert alert-warning">
     No orders match the current filters.
   </div>
 
-  <!-- Orders Table -->
   <div *ngIf="!isLoading && filteredOrders.length > 0">
-    <table class="table table-striped">
-      <thead>
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
         <tr>
           <th>ID</th>
           <th>Order Date</th>
@@ -69,16 +65,14 @@
           <td>
             <button
               *ngIf="!order.isCompleted"
-              class="btn btn-success btn-sm"
-              (click)="completeOrder(order.id)"
-            >
-              Complete
+              class="btn btn-success btn-sm m-2"
+              (click)="completeOrder(order.id)">
+              <i class="bi bi-check-circle"></i> Complete
             </button>
             <button
               class="btn btn-danger btn-sm"
-              (click)="deleteOrder(order.id)"
-            >
-              Delete
+              (click)="deleteOrder(order.id)">
+              <i class="bi bi-trash"></i> Delete
             </button>
           </td>
         </tr>
@@ -86,8 +80,9 @@
     </table>
   </div>
 
-  <!-- Create Order Button -->
   <div class="text-end mt-3">
-    <button (click)="createOrder()" class="btn btn-primary">Create New Order</button>
+    <button (click)="createOrder()" class="btn btn-primary">
+      <i class="bi bi-cart-plus"></i> Create New Order
+    </button>
   </div>
 </div>
