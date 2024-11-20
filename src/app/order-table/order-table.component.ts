@@ -83,6 +83,6 @@ export class OrderTableComponent implements OnInit {
   }
 
   createOrder(): void {
-    this.router.navigate(['/createOrder']);
+    this.router.navigate(['/create-order']);
   }
 }

@@ -14,7 +14,8 @@
     </div>
 
     <div class="form-group">
-      <label>Order Items</label>
+      <label>Order Items</label> 
+    <div> </div>
       <div *ngFor="let item of order.items; let i = index">
         <label for="product-{{ i }}">Product</label>
         <select
@@ -24,8 +25,8 @@
         class="form-control"
         required
       >
-        <option *ngFor="let product of products" [value]="product.id">
-          {{ product.name }}
+        <option *ngFor="let product of products" [value]="product.id" >
+          {{ product.name }} 
         </option>
       </select>
       

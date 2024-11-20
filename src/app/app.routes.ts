@@ -1,9 +1,16 @@
 import { Routes } from '@angular/router';
 import { OrderTableComponent } from './order-table/order-table.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { ProductTableComponent } from './product-table/product-table.component';
+import { PurchaseQueueTableComponent } from './purchase-queue-table/purchase-queue-table.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 export const routes: Routes = [
     {path: '', component: OrderTableComponent},
-    {path: 'createOrder', component: OrderFormComponent },
-    {path: 'createOrder', redirectTo: '', pathMatch: 'full'},
+    {path: 'create-order', component: OrderFormComponent },
+    {path: 'create-order', redirectTo: '', pathMatch: 'full'},
+    {path: 'products', component: ProductTableComponent},
+    {path: 'purchase-queue', component: PurchaseQueueTableComponent},
+    {path: 'create-product', component: ProductFormComponent},
+    {path: 'edit-product/:id', component: ProductFormComponent},
 ];

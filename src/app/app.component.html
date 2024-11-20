@@ -48,7 +48,6 @@
 </footer>
 
 <style>
-  /* Растягиваем body и html на всю высоту экрана */
   html, body {
     height: 100%;
     margin: 0;
@@ -56,11 +55,10 @@
     flex-direction: column;
   }
 
-  /* Гарантируем, что основной контент будет занимать весь доступный пространство между хедером и футером */
   .main-content {
     flex: 1;
     padding: 20px;
-    min-height: calc(100vh - 250px); /* 100vh минус высота хедера и футера */
+    min-height: calc(100vh - 250px); 
   }
 
   .header {
@@ -73,11 +71,10 @@
     color: #007bff !important;
   }
 
-  /* Футер будет оставаться внизу */
   .footer {
     background-color: #343a40;
     color: white;
-    height: 200px; /* фиксированная высота футера */
+    height: 180px;
     margin-top: auto;
   }
 

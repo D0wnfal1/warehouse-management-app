@@ -1,0 +1,63 @@
+<h2 class="text-center my-5">Products</h2>
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <p class="fs-5 mb-0">Overview</p>
+    <div class="input-group w-50">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="filter.name"
+      />
+      <select class="form-select" [(ngModel)]="filter.isInPurchaseQueue">
+        <option [ngValue]="null">All</option>
+        <option [ngValue]="true">In Purchase Queue</option>
+        <option [ngValue]="false">Not In Purchase Queue</option>
+      </select>
+      <button class="btn btn-secondary" (click)="resetFilter()">Reset</button>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Stock</th>
+          <th>Price</th>
+          <th>In Purchase Queue</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of filteredProducts(); let i = index">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.stock }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>
+            <span *ngIf="product.isInPurchaseQueue" class="text-success">Yes</span>
+            <span *ngIf="!product.isInPurchaseQueue" class="text-danger">No</span>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary btn-sm m-2"
+              (click)="editProduct(product.id)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteProduct(product.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-success" (click)="createProduct()">Add Product</button>
+  </div>
+</div>
